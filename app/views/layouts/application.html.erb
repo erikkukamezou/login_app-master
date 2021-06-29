@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LoginApp</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+    <% if logged_in? %>
+      <h2>ログイン中</h2>
+      <%= link_to "ブログ一覧", blogs_path %>
+      <%= link_to "プロフィール", user_path(current_user.id) %>
+      <%= link_to "ログアウト", session_path(current_user.id), method: :delete %>
+    <% else %>
+      <h2>未ログイン</h2>
+      <%= link_to "新規登録", new_user_path %>
+      <%= link_to "ログイン", new_session_path %>
+      <%= link_to "ブログ一覧（アクセス制限確認用）", blogs_path %>
+    <% end %>
+      <p>↑ layouts/application.html.erb ↑</p>
+    <%= yield %>
+  </body>
+</html>
